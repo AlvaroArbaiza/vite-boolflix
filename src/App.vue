@@ -2,11 +2,13 @@
 import axios from 'axios';
 import { store } from './store.js';
 import SearchComp from './components/SearchComp.vue';
+import MainComp from './components/MainComp.vue';
 
 export default {
     name: "App",
     components: {
-        SearchComp
+        SearchComp,
+        MainComp
     },
     data() {
         return {
@@ -42,8 +44,15 @@ export default {
                 axios.get(`${store.pathSearch}${store.apiKey}&query=${store.inputSearch}`)
                     .then(response => {
 
-                        console.log(response.data.results);
+                        // console.log(response.data.results);
 
+                        store.arrayResults = response.data.results
+                        console.log(store.arrayResults);
+
+                        store.arrayResults.forEach((element) => {
+
+
+                        })
 
                     })
             }
@@ -54,6 +63,7 @@ export default {
 
 <template>
     <SearchComp @searchMovie="searchMovie" />
+    <MainComp />
 </template>
 
 <style lang="scss">

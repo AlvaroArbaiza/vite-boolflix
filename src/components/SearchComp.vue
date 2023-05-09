@@ -11,9 +11,9 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <input type="text" id="search" v-model="store.inputSearch">
-        <button type="button" class="btn btn-primary"
+        <button type="button" class="btn btn-primary ms-2"
         @click="$emit('searchMovie')">Search</button>
     </div>
 </template>
