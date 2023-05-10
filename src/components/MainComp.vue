@@ -21,8 +21,8 @@ export default {
             
             <!-- movies -->
             <h2>Movies</h2>
+            <!-- :flag="store.flagsMovies[index].flags.png"  -->
             <CardComp v-for="(elem, index) in store.arrayResults" :key="index" 
-                :flag="store.flagsMovies[index].flags.png" 
 
                 :title= "elem.title"
                 :original_title= "elem.original_title"
@@ -32,8 +32,8 @@ export default {
 
             <!-- series -->
             <h2>Series</h2>
+            <!-- :flag="store.flagsSeries[index].flags.png"  -->
             <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
-                :flag="store.flagsSeries[index].flags.png" 
 
                 :title= "elem.name"
                 :original_title= "elem.original_name"
