@@ -1,20 +1,19 @@
 <script>
 import { store } from '../store.js';
 export default {
-    name: 'SearchComp',
+    name: 'MySearchComp',
     data() {
-            return {
-                store
-            };
-        },
+        return {
+            store
+        };
+    },
 }
 </script>
 
 <template>
     <div class="container">
         <input type="text" id="search" v-model="store.inputSearch">
-        <button type="button" class="btn btn-primary ms-2"
-        @click="$emit('searchMovie')">Search</button>
+        <button type="button" class="btn btn-primary ms-2" @click="$emit('searchMovie')">Search</button>
     </div>
 </template>
 

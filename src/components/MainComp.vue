@@ -18,8 +18,28 @@ export default {
 <template>
     <div class="container text-center">
         <div class="row flex-wrap">
+            
+            <!-- movies -->
+            <h2>Movies</h2>
+            <CardComp v-for="(elem, index) in store.arrayResults" :key="index" 
+                :flag="store.flagsMovies[index].flags.png" 
 
-            <CardComp v-for="(elem, index) in store.arrayResults" :key="index" :card="elem" />
+                :title= "elem.title"
+                :original_title= "elem.original_title"
+                :language= "elem.original_language"
+                :vote= "elem.vote_average">
+            </CardComp>
+
+            <!-- series -->
+            <h2>Series</h2>
+            <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
+                :flag="store.flagsSeries[index].flags.png" 
+
+                :title= "elem.name"
+                :original_title= "elem.original_name"
+                :language= "elem.original_language"
+                :vote= "elem.vote_average">
+            </CardComp>
         </div>
     </div>
 </template>
