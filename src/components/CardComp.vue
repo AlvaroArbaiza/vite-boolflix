@@ -14,7 +14,9 @@ export default {
 
     data() {
         return {
-            store
+            store,
+            arrayStars: [],
+            arrayEmptyStars: []
         };
     },
     methods: {
@@ -57,6 +59,25 @@ export default {
                 
                 return lang.toUpperCase()
             }
+        },
+        voteStars(vote) {
+
+            
+            let num = Math.floor(vote);
+            
+            let numStars = Math.ceil( num / 2)
+
+            let numStarsEmpty = 5 - numStars
+            
+            for (let i = 0; i < numStars; i++) {
+                this.arrayStars.push("fa-solid fa-star");
+            }
+            for (let i = 0; i < numStarsEmpty; i++) {
+                this.arrayEmptyStars.push("fa-regular fa-star");
+            }
+            console.log(this.arrayStars)
+
+            return numStars;
         }
     }
 }
@@ -66,7 +87,7 @@ export default {
     <div class="col-2">
         <div class="card" >
             <div class="card-body">
-                <img :src="`${store.pathImages}${image}`" :alt="title">
+                <img :src=" image != null ? `${store.pathImages}${image}` : `/img/netflix-logo.webp`" :alt="title">
 
                 <!-- Titolo -->
                 <h5>{{ title }}</h5>
@@ -81,7 +102,15 @@ export default {
                         <img :src='`https://flagsapi.com/${changeLang(language)}/flat/64.png`' :alt="language">
                     </div>
                 </div>
-                <h6>Voto: {{ vote }}</h6>
+                <h6>Voto: {{ voteStars(vote) }}</h6>
+                <div class="d-flex justify-content-center text-warning">
+                    <div v-for="( elem, index ) in this.arrayStars">
+                        <i :class="elem"></i>
+                    </div>
+                    <div v-for="( elem, index ) in this.arrayEmptyStars">
+                        <i :class="elem"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
