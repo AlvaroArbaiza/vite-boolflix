@@ -15,6 +15,45 @@ export default {
         return {
             store
         };
+    },
+    methods: {
+        changeLang(lang) {
+
+            if (lang == 'en') {
+
+                return lang = 'US'
+            } else if (lang == 'ja' ) {
+
+                return lang = 'JP'
+            } else if (lang == 'zh' ) {
+
+                return lang = 'CN'
+            } else if (lang == 'he' ) {
+
+                return lang = 'IL'
+            } else if (lang == 'ko' ) {
+
+                return lang = 'KR'
+            } else if (lang == 'uk' ) {
+
+                return lang = 'UA'
+            } else if (lang == 'da' ) {
+
+                return lang = 'DK'
+            } else if (lang == 'cs' ) {
+
+                return lang = 'CZ'
+            } else if (lang == 'fa' ) {
+
+                return lang = 'PK'
+            } else if (lang == 'xx' ) {
+
+                return lang = 'PT'
+            } else {
+                
+                return lang.toUpperCase()
+            }
+        }
     }
 }
 </script>
@@ -35,7 +74,7 @@ export default {
                     <h6 class="m-0">Lingua:</h6>
                     <div class="img">
 
-                        <img :src="flag" :alt="language">
+                        <img :src='`https://flagsapi.com/${changeLang(language)}/flat/64.png`' :alt="language">
                     </div>
                 </div>
                 <h6>Voto: {{ vote }}</h6>
