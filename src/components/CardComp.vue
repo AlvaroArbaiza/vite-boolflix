@@ -8,7 +8,8 @@ export default {
         original_title: String,
         language: String,
         flag: String,
-        vote: Number
+        vote: Number,
+        image: String
     },
 
     data() {
@@ -25,7 +26,7 @@ export default {
             } else if (lang == 'ja' ) {
 
                 return lang = 'JP'
-            } else if (lang == 'zh' ) {
+            } else if (lang == 'zh' || lang == 'zh') {
 
                 return lang = 'CN'
             } else if (lang == 'he' ) {
@@ -49,6 +50,9 @@ export default {
             } else if (lang == 'xx' ) {
 
                 return lang = 'PT'
+            } else if (lang == 'hi' ) {
+
+                return lang = 'IN'
             } else {
                 
                 return lang.toUpperCase()
@@ -61,8 +65,8 @@ export default {
 <template>
     <div class="col-2">
         <div class="card" >
-            <!-- <img :src="flag.flags.png" alt=""> -->
             <div class="card-body">
+                <img :src="`${store.pathImages}${image}`" :alt="title">
 
                 <!-- Titolo -->
                 <h5>{{ title }}</h5>

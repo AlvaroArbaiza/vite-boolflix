@@ -27,7 +27,8 @@ export default {
                 :title= "elem.title"
                 :original_title= "elem.original_title"
                 :language= "elem.original_language"
-                :vote= "elem.vote_average">
+                :vote= "elem.vote_average"
+                :image="elem.poster_path">
             </CardComp>
 
             <!-- series -->
@@ -38,7 +39,8 @@ export default {
                 :title= "elem.name"
                 :original_title= "elem.original_name"
                 :language= "elem.original_language"
-                :vote= "elem.vote_average">
+                :vote= "elem.vote_average"
+                :image="elem.poster_path">
             </CardComp>
         </div>
     </div>
