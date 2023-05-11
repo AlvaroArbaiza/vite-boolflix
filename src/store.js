@@ -7,5 +7,6 @@ export const store = reactive({
     inputSearch: '',
     arrayResults: [],
     arrayResultsSeries: [],
-    pathImages: 'https://image.tmdb.org/t/p/original/'
+    pathImages: 'https://image.tmdb.org/t/p/original/',
+    noResults: false
 })

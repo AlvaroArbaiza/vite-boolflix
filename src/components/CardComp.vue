@@ -15,9 +15,7 @@ export default {
 
     data() {
         return {
-            store,
-            arrayStars: [],
-            arrayEmptyStars: []
+            store
         };
     },
     methods: {
@@ -88,7 +86,7 @@ export default {
                 </h5>
 
                 <!-- Titolo originale -->
-                <h6>
+                <h6 v-if="title !== original_title">
                     <span class="opacity-100">Titolo originale: </span>
                     <span class="opacity-75">{{ original_title }}</span>  
                 </h6>

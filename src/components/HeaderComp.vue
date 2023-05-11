@@ -33,6 +33,10 @@ export default {
                     store.arrayResultsSeries = response.data.results                    
                 })
 
+                if ( store.arrayResults.length == 0 && store.arrayResultsSeries.length == 0 ) {
+                    store.noResults = true
+                }
+
                 store.inputSearch = '';
                 
             }            

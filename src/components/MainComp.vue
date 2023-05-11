@@ -11,11 +11,21 @@ export default {
         return {
             store
         };
-    },
+    }
 }
 </script>
 
 <template>
+    <!-- no results found -->
+    <div id="noResults" class="d-flex justify-content-center bg-white position-relative" v-if="store.noResults">
+        <!-- text -->
+        <div id="noReText" class="position-absolute">
+            <span class="text-uppercase text-black">no results found</span>
+        </div>
+        
+        <iframe width="1120" height="630" src="https://www.youtube.com/embed/2apVwq-pX9E?start=4&autoplay=1&controls=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
     <div class="container">
             
         <!-- movies -->
@@ -52,4 +62,16 @@ export default {
 <style lang="scss" scoped>
 @use '../../src/style/partials/_mixin.scss' as *;
 @use '../style/partials/_variables.scss' as *;
+
+#noResults {
+    width: 100%;
+
+    // text
+    #noReText {
+        left: 50%;
+        top: 100px;
+        font-size: 3rem;
+        transform: translateX(-50%);
+    }
+}
 </style>
