@@ -32,6 +32,8 @@ export default {
 
                     store.arrayResultsSeries = response.data.results                    
                 })
+
+                store.inputSearch = '';
                 
             }            
             console.log(store.arrayResultsSeries)
@@ -46,9 +48,13 @@ export default {
 
         <!-- left-side -->
         <div id="left" class="d-flex">
+
+            <!-- logo -->
             <div id="logo">
                 <img src="/img/netflix-logo-complete.png" alt="netflix logo">
             </div>
+
+            <!-- nav -->
             <nav class="d-flex align-items-center">
                 <ul class="d-flex p-0">
                     <li>
@@ -80,9 +86,31 @@ export default {
         </div>
 
         <!-- right side -->
-        <div id="right">
+        <div id="right" class="d-flex align-items-center gap-4">
 
-            <MySearchComp @searchMovie="searchMovie"/>
+            <!-- search -->
+            <div>
+                <MySearchComp @searchMovie="searchMovie"/>
+            </div>
+
+            <!-- kids -->
+            <div>
+                <a class="text-decoration-none text-white" href="#">
+                    <span class="text-uppercase">kids</span>
+                </a>
+            </div>
+
+            <!-- alerts -->
+            <div>
+                <a class="text-decoration-none text-white fs-4" href="#">
+                    <i class="fa-solid fa-bell"></i>
+                </a>
+            </div>
+
+            <!-- user -->
+            <div id="user">
+                <img src="/img/smile-user.jpg" alt="smile image">
+            </div>
         </div>
     </div>
 </template>
@@ -91,45 +119,58 @@ export default {
 @use '../../src/style/partials/_mixin.scss' as *;
 @use '../style/partials/_variables.scss' as *;
 
-#left {
-    // logo
-    #logo {
-        min-width: 100px;
-        max-width: 150px;
-    }
-    // nav
-    nav {
-        ul {
-            list-style: none;
-            margin: 0 0 0 2rem;
+.container {
 
-            li {    
-                margin: 0 1rem;
-                a {
-                    position: relative;
-                    color: #ffff;
-                    text-decoration: none;
+    // left side
+    #left {
 
-                    span {
-                        opacity: 0.5;
-                    }
-                    
-                    hr {
-                        position: absolute;
-                        width: 100%;
-                        margin: 0;
-                        border: 3px solid #b71811;
-                        bottom: -27px;
-                        left: 0;
-                        opacity: 0;
-                    }                    
-                    
-                    &:hover hr,
-                    &:hover span {
-                        opacity: 1;
+        // logo
+        #logo {
+            min-width: 100px;
+            max-width: 150px;
+        }
+
+        // nav
+        nav {
+            ul {
+                list-style: none;
+                margin: 0 0 0 2rem;
+    
+                li {    
+                    margin: 0 1rem;
+                    a {
+                        position: relative;
+                        color: #ffff;
+                        text-decoration: none;
+    
+                        span {
+                            opacity: 0.5;
+                        }
+                        
+                        hr {
+                            position: absolute;
+                            width: 100%;
+                            margin: 0;
+                            border: 3px solid #b71811;
+                            bottom: -27px;
+                            left: 0;
+                            opacity: 0;
+                        }                    
+                        
+                        &:hover hr,
+                        &:hover span {
+                            opacity: 1;
+                        }
                     }
                 }
             }
+        }
+    }
+
+    // right side
+    #right {
+        #user {
+            width: 2rem;
         }
     }
 }

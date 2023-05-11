@@ -11,13 +11,49 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <input type="text" id="search" v-model="store.inputSearch">
-        <button type="button" class="btn btn-primary ms-2" @click="$emit('searchMovie')">Search</button>
+    <div class="container d-flex align-items-center p-0">
+        <div id="cont-search">
+            
+            <i class="fa-solid fa-magnifying-glass"></i>             
+            <input type="text" id="search" v-model="store.inputSearch"
+            @keyup.enter="$emit('searchMovie')">
+        </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../../src/style/partials/_mixin.scss' as *;
 @use '../style/partials/_variables.scss' as *;
+
+#cont-search {
+    position: relative;
+
+    i {
+        position: absolute;
+        font-size: 1.2rem;
+        bottom: 50%;
+        left: 0;
+        transform: translateY(50%);
+        color: #fff;
+        z-index: 1;
+    }
+
+    input {
+        position: relative;
+        width: 20px;;
+        background-color: transparent;
+        border: none;
+        border-radius: 2px;
+        color: #fff;
+        z-index: 2;
+        cursor: pointer;
+        transition: width 0.4s ease-in-out;
+
+        &:focus {
+            cursor: auto;
+            width: 200px;
+            text-indent: 2rem;
+        }
+    }
+}
 </style>

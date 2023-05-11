@@ -19,7 +19,7 @@ export default {
     <div class="container">
             
         <!-- movies -->
-        <div class="row flex-wrap" v-if="store.arrayResults.length">
+        <div class="row flex-wrap m-0" v-if="store.arrayResults.length">
             <h2 class="text-white mt-4">Movies</h2>
             <CardComp v-for="(elem, index) in store.arrayResults" :key="index" 
 
@@ -27,12 +27,13 @@ export default {
                 :original_title= "elem.original_title"
                 :language= "elem.original_language"
                 :vote= "elem.vote_average"
-                :image="elem.poster_path">
+                :image="elem.poster_path"
+                :overview="elem.overview">
             </CardComp>
         </div>
 
         <!-- series -->
-        <div class="row flex-wrap" v-if="store.arrayResultsSeries.length">
+        <div class="row flex-wrap m-0" v-if="store.arrayResultsSeries.length">
 
             <h2 class="text-white mt-4">Series</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
@@ -41,7 +42,8 @@ export default {
                 :original_title= "elem.original_name"
                 :language= "elem.original_language"
                 :vote= "elem.vote_average"
-                :image="elem.poster_path">
+                :image="elem.poster_path"
+                :overview="elem.overview">
             </CardComp>
         </div>
     </div>
