@@ -1,65 +1,46 @@
 <script>
-import axios from 'axios';
 import { store } from './store.js';
-import MySearchComp from './components/MySearchComp.vue';
+import HeaderComp from './components/HeaderComp.vue';
 import MainComp from './components/MainComp.vue';
 
 export default {
     name: "App",
     components: {
-        MySearchComp,
+        HeaderComp,
         MainComp
     },
     data() {
         return {
             store
         };
-    },
-
-    created() {
-    },
-
-    computed: {
-        
-    },
-    
-    methods: {
-        // funzione che prende l'array in base ai risultati trovati
-        searchMovie() {
-
-            if (store.inputSearch !== '') {
-
-                // ricerca per film
-                axios.get(`${store.pathSearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
-                .then(response => {
-
-                    store.arrayResults = response.data.results
-                   
-                })
-
-                // ricerca per serie tv
-                axios.get(`${store.pathSearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
-                .then(response => {
-
-                    store.arrayResultsSeries = response.data.results
-
-                    
-                })
-                
-            }            
-            console.log(store.arrayResultsSeries)
-            console.log(store.arrayResults)
-        },
-    
     }
 }
 </script>
 
 <template>
-    <MySearchComp @searchMovie="searchMovie" />
-    <MainComp />
+    <!-- header -->
+    <header class="d-flex align-items-center">
+        <HeaderComp />
+    </header>
+
+    <!-- main -->
+    <main>
+        <MainComp />
+    </main>
 </template>
 
 <style lang="scss">
 @use './style/main.scss';
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #000000;
+}
+
+main {
+    width: 100%;
+    background-color: #141414;
+}
+
 </style>

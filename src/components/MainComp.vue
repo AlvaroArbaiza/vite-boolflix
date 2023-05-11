@@ -16,12 +16,11 @@ export default {
 </script>
 
 <template>
-    <div class="container text-center">
-        <div class="row flex-wrap">
+    <div class="container">
             
-            <!-- movies -->
-            <h2>Movies</h2>
-            <!-- :flag="store.flagsMovies[index].flags.png"  -->
+        <!-- movies -->
+        <div class="row flex-wrap" v-if="store.arrayResults.length">
+            <h2 class="text-white mt-4">Movies</h2>
             <CardComp v-for="(elem, index) in store.arrayResults" :key="index" 
 
                 :title= "elem.title"
@@ -30,10 +29,12 @@ export default {
                 :vote= "elem.vote_average"
                 :image="elem.poster_path">
             </CardComp>
+        </div>
 
-            <!-- series -->
-            <h2>Series</h2>
-            <!-- :flag="store.flagsSeries[index].flags.png"  -->
+        <!-- series -->
+        <div class="row flex-wrap" v-if="store.arrayResultsSeries.length">
+
+            <h2 class="text-white mt-4">Series</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
 
                 :title= "elem.name"

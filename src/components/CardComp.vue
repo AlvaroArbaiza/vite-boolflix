@@ -55,62 +55,54 @@ export default {
             } else if (lang == 'hi' ) {
 
                 return lang = 'IN'
+            } else if (lang == 'el' ) {
+
+                return lang = 'GR'
             } else {
                 
                 return lang.toUpperCase()
             }
         },
         voteStars(vote) {
-
-            
-            let num = Math.floor(vote);
-            
-            let numStars = Math.ceil( num / 2)
-
-            let numStarsEmpty = 5 - numStars
-            
-            for (let i = 0; i < numStars; i++) {
-                this.arrayStars.push("fa-solid fa-star");
-            }
-            for (let i = 0; i < numStarsEmpty; i++) {
-                this.arrayEmptyStars.push("fa-regular fa-star");
-            }
-            console.log(this.arrayStars)
-
-            return numStars;
+            return Math.ceil(vote / 2)
         }
     }
 }
 </script>
 
 <template>
-    <div class="col-2">
-        <div class="card" >
-            <div class="card-body">
-                <img :src=" image != null ? `${store.pathImages}${image}` : `/img/netflix-logo.webp`" :alt="title">
+    <div class="col-2 my-2">
+        <div class="card border border-0 rounded-0 bg-transparent" >
 
+            <!-- Copertina -->
+            <img :src=" image != null ? `${store.pathImages}${image}` : `/img/netflix-logo.webp`" :alt="title">
+
+            <!-- Card Body -->
+            <div class="card-body">
+            
                 <!-- Titolo -->
                 <h5>{{ title }}</h5>
 
                 <!-- Titolo originale -->
                 <h6>{{ original_title }}</h6>
-                <!-- <h6>Lingua: {{ card.original_language }}</h6> -->
+
+                <!-- Lingua -->
                 <div class="language">
                     <h6 class="m-0">Lingua:</h6>
+
+                    <!-- flag -->
                     <div class="img">
 
                         <img :src='`https://flagsapi.com/${changeLang(language)}/flat/64.png`' :alt="language">
                     </div>
                 </div>
-                <h6>Voto: {{ voteStars(vote) }}</h6>
+
+                <!-- Voto -->
                 <div class="d-flex justify-content-center text-warning">
-                    <div v-for="( elem, index ) in this.arrayStars">
-                        <i :class="elem"></i>
+                    <div v-for=" elem in 5">
+                        <i class="fa-star" :class=" elem <= voteStars(vote) ? `fa-solid` : `fa-regular` "></i>
                     </div>
-                    <div v-for="( elem, index ) in this.arrayEmptyStars">
-                        <i :class="elem"></i>
-                    </div>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -120,19 +112,30 @@ export default {
 @use '../../src/style/partials/_mixin.scss' as *;
 @use '../style/partials/_variables.scss' as *;
 
-.language {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0.5rem;
+.card {
+    height: 290px;
+    flex-direction: row;
 
-    .img {
-        width: 30px;
+    img {
+        object-fit: cover;
+    }
 
-        img {
+    // card-body
+    .card-body { 
+        display: none !important;
     
-            max-width: 100%;
+        // lingua
+        .language {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        
+            // flag
+            .img {
+                width: 30px;
+            }
         }
     }
-    }
+}
 </style>
