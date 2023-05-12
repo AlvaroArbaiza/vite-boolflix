@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store.js';
+import axios from 'axios';
 import CardComp from './CardComp.vue';
 
 export default {
@@ -11,13 +12,37 @@ export default {
         return {
             store
         };
+    },
+    created() {
+        this.topRated()
+    },
+    methods: {
+        topRated() {
+            
+            // ricerca per film
+            axios.get(`${store.pathTopRated}${store.apiKey}${store.pageTopRated}`)
+                .then(response => {
+
+                    store.arrayResultsTopRated = response.data.results              
+                })
+        },
+        noResults() {
+            if (store.noResults == true && store.noResultsSeries == true) {
+                store.bol = false
+                return true
+            } else {
+
+                store.bol = true
+                return false
+            }
+        }
     }
 }
 </script>
 
 <template>
     <!-- no results found -->
-    <div id="noResults" class="d-flex justify-content-center bg-white position-relative" v-if="store.noResults">
+    <div id="noResults" class="d-flex justify-content-center bg-white position-relative" v-if="this.noResults()">
         <!-- text -->
         <div id="noReText" class="position-absolute">
             <span class="text-uppercase text-black">no results found</span>
@@ -27,6 +52,20 @@ export default {
     </div>
 
     <div class="container">
+
+        <!-- Top Rated -->
+        <div class="row flex-wrap m-0" v-if="store.bol">
+            <h2 class="text-white mt-4">Top Rated</h2>
+            <CardComp v-for="(elem, index) in store.arrayResultsTopRated" :key="index" 
+
+                :title= "elem.title"
+                :original_title= "elem.original_title"
+                :language= "elem.original_language"
+                :vote= "elem.vote_average"
+                :image="elem.poster_path"
+                :overview="elem.overview">
+            </CardComp>
+        </div>
             
         <!-- movies -->
         <div class="row flex-wrap m-0" v-if="store.arrayResults.length">

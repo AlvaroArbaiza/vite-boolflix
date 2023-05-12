@@ -126,6 +126,7 @@ export default {
         position: relative;
         height: 290px;
         flex-direction: row;
+        filter: drop-shadow(2px 4px 6px black);
     
         img {
             object-fit: cover;

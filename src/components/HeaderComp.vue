@@ -19,29 +19,39 @@ export default {
 
             if (store.inputSearch !== '') {
 
+                
+
                 // ricerca per film
                 axios.get(`${store.pathSearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
                 .then(response => {
 
-                    store.arrayResults = response.data.results              
+                    store.arrayResults = response.data.results      
+                    
+                    if ( store.arrayResults.length == 0 ) {
+                        store.noResults = true
+                    } else {
+                        store.noResults = false
+                    }
+                    console.log(store.arrayResults.length)
                 })
 
                 // ricerca per serie tv
                 axios.get(`${store.pathSearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
                 .then(response => {
 
-                    store.arrayResultsSeries = response.data.results                    
+                    store.arrayResultsSeries = response.data.results    
+
+                    if ( store.arrayResultsSeries.length == 0 ) {
+                        store.noResultsSeries = true
+                    } else {
+                        store.noResultsSeries = false
+                    }             
+                    console.log(store.arrayResultsSeries.length)
                 })
-
-                if ( store.arrayResults.length == 0 && store.arrayResultsSeries.length == 0 ) {
-                    store.noResults = true
-                }
-
-                store.inputSearch = '';
                 
-            }            
-            console.log(store.arrayResultsSeries)
-            console.log(store.arrayResults)
+                // reset input
+                store.inputSearch = '';                
+            } 
         }
     }
 }
