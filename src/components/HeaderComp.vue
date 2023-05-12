@@ -27,10 +27,12 @@ export default {
 
                     store.arrayResults = response.data.results      
                     
+                    // Condizione che return true se l'array non ha del contenuto oppure return false se non ne ha
                     if ( store.arrayResults.length == 0 ) {
                         store.noResults = true
                     } else {
                         store.noResults = false
+                        store.bol = false
                     }
                     console.log(store.arrayResults.length)
                 })
@@ -41,10 +43,13 @@ export default {
 
                     store.arrayResultsSeries = response.data.results    
 
+                    // Condizione che return true se l'array non ha del contenuto oppure return false se non ne ha
                     if ( store.arrayResultsSeries.length == 0 ) {
+                        
                         store.noResultsSeries = true
                     } else {
                         store.noResultsSeries = false
+                        store.bol = false
                     }             
                     console.log(store.arrayResultsSeries.length)
                 })
@@ -65,7 +70,10 @@ export default {
 
             <!-- logo -->
             <div id="logo">
-                <img src="/img/netflix-logo-complete.png" alt="netflix logo">
+                <a href="/">
+
+                    <img src="/img/netflix-logo-complete.png" alt="netflix logo">
+                </a>
             </div>
 
             <!-- nav -->

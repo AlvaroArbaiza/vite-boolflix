@@ -27,12 +27,14 @@ export default {
                 })
         },
         noResults() {
+
+            // Se non ci sono risultati in entrambi gli array return true
             if (store.noResults == true && store.noResultsSeries == true) {
+                                
                 store.bol = false
                 return true
             } else {
 
-                store.bol = true
                 return false
             }
         }
@@ -42,8 +44,8 @@ export default {
 
 <template>
     <!-- no results found -->
-    <div id="noResults" class="d-flex justify-content-center bg-white position-relative" v-if="this.noResults()">
-        <!-- text -->
+    <div id="noResults" class="d-flex justify-content-center bg-white position-relative" v-if="noResults()">
+        text
         <div id="noReText" class="position-absolute">
             <span class="text-uppercase text-black">no results found</span>
         </div>
