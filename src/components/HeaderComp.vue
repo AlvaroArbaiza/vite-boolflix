@@ -19,8 +19,6 @@ export default {
 
             if (store.inputSearch !== '') {
 
-                
-
                 // ricerca per film
                 axios.get(`${store.pathSearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
                 .then(response => {
