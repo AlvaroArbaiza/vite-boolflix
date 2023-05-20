@@ -20,23 +20,22 @@ export default {
             if (store.inputSearch !== '') {
 
                 // ricerca per film
-                axios.get(`${store.pathSearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
+                axios.get(`${store.path}${store.SearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
                 .then(response => {
 
-                    store.arrayResults = response.data.results      
+                    store.arrayResultsMovies = response.data.results      
                     
                     // Condizione che return true se l'array non ha del contenuto oppure return false se non ne ha
-                    if ( store.arrayResults.length == 0 ) {
+                    if ( store.arrayResultsMovies.length == 0 ) {
                         store.noResults = true
                     } else {
                         store.noResults = false
                         store.bol = false
                     }
-                    console.log(store.arrayResults.length)
                 })
 
                 // ricerca per serie tv
-                axios.get(`${store.pathSearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
+                axios.get(`${store.path}${store.SearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
                 .then(response => {
 
                     store.arrayResultsSeries = response.data.results    
@@ -49,7 +48,6 @@ export default {
                         store.noResultsSeries = false
                         store.bol = false
                     }             
-                    console.log(store.arrayResultsSeries.length)
                 })
                 
                 // reset input
