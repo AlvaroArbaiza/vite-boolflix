@@ -1,6 +1,20 @@
 import { reactive } from 'vue'
 
 export const store = reactive({
+    menu: [
+        {
+            id: 'Home',
+            onPage: true
+        },
+        {
+            id: 'Serie Tv',
+            onPage: false
+        },
+        {
+            id: 'Film',
+            onPage: false
+        }
+    ],
     apiKey: '?api_key=f6136263afcc0dd16ffa7754d6069e4e',
     path: 'https://api.themoviedb.org/3/',
     SearchMovie: 'search/movie',

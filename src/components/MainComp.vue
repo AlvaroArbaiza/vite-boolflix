@@ -354,7 +354,7 @@ export default {
                 <!-- Popular -->
                 <div class="carousel" v-if="store.bol">
                 
-                    <h3 class="fs-2 greyH3 pt-4">Popular</h3>
+                    <h3 class="fs-2 greyH3 mt-4">Popular</h3>
                     <div class="row m-0">
                         <CardComp v-for="(elem, index) in store.arrayResultsPopular" :key="index" 
             
@@ -416,7 +416,7 @@ export default {
                 <!-- Popular -->
                 <div class="carousel" v-if="store.bol">
                 
-                    <h3 class="fs-2 greyH3 pt-4">Popular</h3>
+                    <h3 class="fs-2 greyH3 mt-4">Popular</h3>
                     <div class="row m-0">
                         <CardComp v-for="(elem, index) in store.arrayResultsSeriesPopular" :key="index" 
             
@@ -515,7 +515,7 @@ export default {
             right: 0;
             bottom: 0;
             width: 14rem;
-            height: calc(100% - 5.3rem);
+            height: calc(100% - 3.5rem);
             background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8) 55% 97%, transparent 98%);
             border-right: 5px solid white;
             opacity: 0;
@@ -532,7 +532,7 @@ export default {
             left: 0;
             bottom: 0;
             width: 14rem;
-            height: calc(100% - 5.3rem);
+            height: calc(100% - 3.5rem);
             background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.8) 55% 97%, transparent 98%);
             border-left: 5px solid white;
             opacity: 0;

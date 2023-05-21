@@ -75,30 +75,18 @@ export default {
             <!-- nav -->
             <nav class="d-flex align-items-center">
                 <ul class="d-flex p-0">
-                    <li>
-                        <a href="#">
+
+                    <!-- links -->
+                    <li v-for="(elem, index) in store.menu" :key="index">  
+                        
+                        <!-- se onPage è true  -->
+                        <a :class='elem.onPage? "onPage" : ""'  href="#">
                             <span>
-                                Home
+                                {{ elem.id }}
                             </span>
                             <hr>                            
                         </a> 
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                Serie TV
-                            </span>
-                            <hr>                            
-                        </a> 
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>
-                                Film
-                            </span>
-                            <hr>                            
-                        </a> 
-                    </li>
+                    </li>                    
                 </ul>        
             </nav>
         </div>
@@ -173,10 +161,14 @@ export default {
                             bottom: -27px;
                             left: 0;
                             opacity: 0;
-                        }                    
-                        
-                        &:hover hr,
-                        &:hover span {
+                        }                           
+                    }
+
+                    // quando onPage dell'array menu è true
+                    .onPage {
+
+                        hr,
+                        span {
                             opacity: 1;
                         }
                     }
