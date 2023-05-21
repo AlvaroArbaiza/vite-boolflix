@@ -318,10 +318,13 @@ export default {
 
             <!----------- movies ----------->
             <div>
+                <div>
+                    <h2 class="text-white fs-1 my-4 fw-bold">Films</h2>
+                </div>
                 <!-- Top Rated -->
                 <div class="carousel" v-if="store.bol">
 
-                    <h2 class="text-white pt-4">Top Rated</h2>
+                    <h3 class="fs-2 greyH3">Top Rated</h3>
                     <div class="row m-0" >
     
                         <CardComp v-for="(elem, index) in store.arrayResultsTopRated" :key="index" 
@@ -351,7 +354,7 @@ export default {
                 <!-- Popular -->
                 <div class="carousel" v-if="store.bol">
                 
-                    <h2 class="text-white pt-4">Popular</h2>
+                    <h3 class="fs-2 greyH3 pt-4">Popular</h3>
                     <div class="row m-0">
                         <CardComp v-for="(elem, index) in store.arrayResultsPopular" :key="index" 
             
@@ -379,10 +382,13 @@ export default {
 
             <!----------- tv series ----------->
             <div>
+                <div>
+                    <h2 class="text-white fs-1 my-4 fw-bold">Tv Series</h2>
+                </div>
                 <!-- Top Rated -->
                 <div class="carousel" v-if="store.bol">
                 
-                    <h2 class="text-white pt-4">Top Rated</h2>
+                    <h3 class="fs-2 greyH3">Top Rated</h3>
                     <div class="row m-0">
                         <CardComp v-for="(elem, index) in store.arrayResultsSeriesTopRated" :key="index" 
             
@@ -410,7 +416,7 @@ export default {
                 <!-- Popular -->
                 <div class="carousel" v-if="store.bol">
                 
-                    <h2 class="text-white pt-4">Popular</h2>
+                    <h3 class="fs-2 greyH3 pt-4">Popular</h3>
                     <div class="row m-0">
                         <CardComp v-for="(elem, index) in store.arrayResultsSeriesPopular" :key="index" 
             
@@ -440,7 +446,7 @@ export default {
             
         <!----------- search movies ----------->
         <div class="row m-0" v-if="store.arrayResultsMovies.length">
-            <h2 class="text-white mt-4">Movies</h2>
+            <h2 class="greyH3 mt-4">Movies</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsMovies" :key="index" 
 
                 :title= "elem.title"
@@ -459,7 +465,7 @@ export default {
         <!----------- search tv series ----------->
         <div class="row m-0" v-if="store.arrayResultsSeries.length">
 
-            <h2 class="text-white mt-4">Series</h2>
+            <h2 class="greyH3 mt-4">Series</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
 
                 :title= "elem.name"
@@ -535,15 +541,13 @@ export default {
                 opacity: 1;
             }
         }
+
+        // row
         .row {
             flex-wrap: nowrap;
             position: relative;
 
         }
-
-        // &::-webkit-scrollbar {
-        //     display: none;
-        // }
     }
 }
 </style>

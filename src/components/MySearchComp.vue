@@ -32,7 +32,7 @@ export default {
         position: absolute;
         font-size: 1.2rem;
         bottom: 50%;
-        left: 0;
+        left: 0.5rem;
         transform: translateY(50%);
         color: #fff;
         z-index: 1;
@@ -40,7 +40,7 @@ export default {
 
     input {
         position: relative;
-        width: 20px;;
+        width: 20px;
         background-color: transparent;
         border: none;
         border-radius: 2px;
@@ -52,6 +52,7 @@ export default {
         &:focus {
             cursor: auto;
             width: 200px;
+            height: 2rem;
             text-indent: 2rem;
         }
     }

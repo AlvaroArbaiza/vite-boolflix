@@ -29,6 +29,6 @@ export const store = reactive({
     tlrIndSeries: '',
     tlrIndSeries2: '',
     closeModal: false,
-    num: 0
-
+    num: 0,
+    intro: true
 })
