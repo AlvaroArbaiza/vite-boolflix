@@ -13,8 +13,12 @@ export default {
             store
         };
     },
-    created() {
+    mounted() {
         this.moviesSeries()
+    },
+    created() {
+    },
+    computed: {
     },
     methods: {
         moviesSeries() {
@@ -230,10 +234,6 @@ export default {
                 let row = event.target.parentNode.querySelector(".row");                
                 
                 row.style.left = `-${store.num}%`;
-                
-                console.log(row);
-                console.log(store.num);
-
             } 
 
             // Se lo slide è alla schermata finale fa scomparire il div next
@@ -317,12 +317,12 @@ export default {
         <div>
 
             <!----------- movies ----------->
-            <div>
+            <div v-if="store.bol">
                 <div>
                     <h2 class="text-white fs-1 my-4 fw-bold">Films</h2>
                 </div>
                 <!-- Top Rated -->
-                <div class="carousel" v-if="store.bol">
+                <div class="carousel">
 
                     <h3 class="fs-2 greyH3">Top Rated</h3>
                     <div class="row m-0" >
@@ -381,12 +381,12 @@ export default {
             </div>
 
             <!----------- tv series ----------->
-            <div>
+            <div v-if="store.bol">
                 <div>
                     <h2 class="text-white fs-1 my-4 fw-bold">Tv Series</h2>
                 </div>
                 <!-- Top Rated -->
-                <div class="carousel" v-if="store.bol">
+                <div class="carousel">
                 
                     <h3 class="fs-2 greyH3">Top Rated</h3>
                     <div class="row m-0">
@@ -446,7 +446,7 @@ export default {
             
         <!----------- search movies ----------->
         <div class="row m-0" v-if="store.arrayResultsMovies.length">
-            <h2 class="greyH3 mt-4">Movies</h2>
+            <h2 class="text-white fs-1 my-4 fw-bold">Movies</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsMovies" :key="index" 
 
                 :title= "elem.title"
@@ -465,7 +465,7 @@ export default {
         <!----------- search tv series ----------->
         <div class="row m-0" v-if="store.arrayResultsSeries.length">
 
-            <h2 class="greyH3 mt-4">Series</h2>
+            <h2 class="text-white fs-1 my-4 fw-bold">Series</h2>
             <CardComp v-for="(elem, index) in store.arrayResultsSeries" :key="index" 
 
                 :title= "elem.name"

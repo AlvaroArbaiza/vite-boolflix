@@ -4,15 +4,15 @@ export const store = reactive({
     menu: [
         {
             id: 'Home',
-            onPage: true
+            path: '/'
         },
         {
             id: 'Serie Tv',
-            onPage: false
+            path: '/SeriesTv'
         },
         {
             id: 'Film',
-            onPage: false
+            path: '/Film'
         }
     ],
     apiKey: '?api_key=f6136263afcc0dd16ffa7754d6069e4e',

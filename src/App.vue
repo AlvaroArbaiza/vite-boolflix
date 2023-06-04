@@ -37,7 +37,7 @@ export default {
     
         <!-- main -->
         <main>
-            <MainComp />
+            <router-view></router-view>
         </main>
     
     </div>
@@ -419,7 +419,6 @@ body {
 
                 .lamp-1 {
                     --color: #ff0100;
-                    z: 6;
                     left: 0.7%;
                     width: 1%;
                     animation-delay: (random(200) / 100) + s; 
@@ -777,8 +776,7 @@ body {
                     }
                 }
             }
-        }
-              
+        }              
     }
 }
 

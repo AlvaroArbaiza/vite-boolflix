@@ -66,10 +66,9 @@ export default {
 
             <!-- logo -->
             <div id="logo">
-                <a href="/">
-
+                <router-link to="/">
                     <img src="/img/netflix-logo-complete.png" alt="netflix logo">
-                </a>
+                </router-link>
             </div>
 
             <!-- nav -->
@@ -80,12 +79,12 @@ export default {
                     <li v-for="(elem, index) in store.menu" :key="index">  
                         
                         <!-- se onPage è true  -->
-                        <a :class='elem.onPage? "onPage" : ""'  href="#">
+                        <router-link :to="elem.path">
                             <span>
                                 {{ elem.id }}
                             </span>
                             <hr>                            
-                        </a> 
+                        </router-link > 
                     </li>                    
                 </ul>        
             </nav>
@@ -165,7 +164,7 @@ export default {
                     }
 
                     // quando onPage dell'array menu è true
-                    .onPage {
+                    .router-link-active {
 
                         hr,
                         span {
