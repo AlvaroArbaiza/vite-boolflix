@@ -7,6 +7,18 @@ export default {
             store
         };
     },
+    computed: {
+        getSearchRoute() {
+            return {
+                name: 'search-results',
+                query: {
+                keyword: this.store.inputSearch
+                }
+            };
+        }
+    },
+    methods: {
+    }
 }
 </script>
 
@@ -14,9 +26,11 @@ export default {
     <div class="container d-flex align-items-center p-0">
         <div id="cont-search">
             
-            <i class="fa-solid fa-magnifying-glass"></i>             
+            <i class="fa-solid fa-magnifying-glass"></i>  
+
+            <!-- input che al premere il tasto enter attraverso emit richiama il metodo del genitore (search) -->
             <input type="text" id="search" v-model="store.inputSearch"
-            @keyup.enter="$emit('searchMovie')">
+            @keyup.enter="$emit('search')">
         </div>
     </div>
 </template>

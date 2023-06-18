@@ -14,45 +14,40 @@ export default {
         };
     },    
     methods: {
-        // funzione che prende l'array in base ai risultati trovati
-        searchMovie() {
+        
+        // funzione asincrona per la ricerca di film e serie tv, che ottiene gli array in base ai risultati trovati
+        async search() {
 
+            // tutto parte se input non è vuoto
             if (store.inputSearch !== '') {
 
-                // ricerca per film
-                axios.get(`${store.path}${store.SearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
-                .then(response => {
+                // Effettua il routing alla pagina dei risultati di ricerca e mette come query sul path, il nome della ricerca effettuata
+                this.$router.push({ name: 'search-results', query: { results: this.store.inputSearch } });
 
-                    store.arrayResultsMovies = response.data.results      
-                    
-                    // Condizione che return true se l'array non ha del contenuto oppure return false se non ne ha
-                    if ( store.arrayResultsMovies.length == 0 ) {
-                        store.noResults = true
-                    } else {
-                        store.noResults = false
-                        store.bol = false
-                    }
-                })
-
-                // ricerca per serie tv
-                axios.get(`${store.path}${store.SearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
-                .then(response => {
-
-                    store.arrayResultsSeries = response.data.results    
-
-                    // Condizione che return true se l'array non ha del contenuto oppure return false se non ne ha
-                    if ( store.arrayResultsSeries.length == 0 ) {
-                        
-                        store.noResultsSeries = true
-                    } else {
-                        store.noResultsSeries = false
-                        store.bol = false
-                    }             
-                })
+                store.isSearching = true;
                 
-                // reset input
-                store.inputSearch = '';                
-            } 
+                try {
+                    const [response1, response2] = await Promise.all([
+
+                        axios.get(`${store.path}${store.SearchMovie}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`),
+                        axios.get(`${store.path}${store.SearchSeries}${store.apiKey}&query=${encodeURIComponent(store.inputSearch)}`)
+                    ]);
+
+                    store.arrayResultsMovies = response1.data.results;
+                    store.arrayResultsSeries = response2.data.results;
+
+                    // Condizione che mi da true se gli array non hanno risultati nella ricerca 
+                    if ( store.arrayResultsMovies.length === 0 && store.arrayResultsSeries.length === 0 ) {
+                        store.noResults = true
+                    } 
+
+                    // reset input
+                    store.inputSearch = '';
+                
+                } catch (error) {
+                    console.error(error);
+                }
+            }
         }
     }
 }
@@ -78,7 +73,9 @@ export default {
                     <!-- links -->
                     <li v-for="(elem, index) in store.menu" :key="index">  
                         
-                        <!-- se onPage è true  -->
+                        <!--
+                            ** ROUTER-LINK ** : l'attributo "to" specifica il percorso della rotta a cui si desidera reindirizzare. Quando l'utente fa clic sul link, Vue Router effettuerà reindirizzamento all'URL corrispondente, associando il componente specificato nella definizione della rotta corrispondente al percorso. Questo componente viene quindi renderizzato all'interno di ROUTER-VIEW
+                        -->
                         <router-link :to="elem.path">
                             <span>
                                 {{ elem.id }}
@@ -95,7 +92,7 @@ export default {
 
             <!-- search -->
             <div>
-                <MySearchComp @searchMovie="searchMovie"/>
+                <MySearchComp @search="search"/>
             </div>
 
             <!-- kids -->
@@ -163,7 +160,7 @@ export default {
                         }                           
                     }
 
-                    // quando onPage dell'array menu è true
+                    // ROUTER-LINK otterrà questa classa automaticamente quando la sua rotta corrisponderà a quella corrente
                     .router-link-active {
 
                         hr,

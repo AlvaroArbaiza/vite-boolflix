@@ -12,7 +12,7 @@ export default {
         image: String,
         overview: String,
         ind: Number,
-        indTrailer: Number
+        indTrailer: String
     },
 
     data() {
@@ -125,7 +125,7 @@ export default {
 
         <!------------------------- modal ----------------------------->
 
-        <!-- condizioni per la quale trailer comparirà, se gli indici sono uguali -->
+        <!-- condizioni per la quale trailer comparirà, se gli indici sono uguali ( che siano maggiori o uguali a 0 ) -->
         <div v-if="indTrailer / ind === 1 || indTrailer + ind === 0" class="trailer p-0">
 
             <!-- trailer-content -->

@@ -14,7 +14,7 @@ export default {
             store
         };
     },
-    created() {
+    mounted() {
         this.intro();
     },
     methods: {
@@ -37,35 +37,48 @@ export default {
     
         <!-- main -->
         <main>
-            <router-view></router-view>
-        </main>
-    
+            <!--
+                ** ROUTER-VIEW **: Viene utilizzato per visualizzare il componente corretto in base alla rotta attuale
+                ** V-SLOT **: Viene utilizzata per definire uno slot in <router-view>. In questo caso, con l'oggetto destrutturato {Component, route}, avremo accesso alle proprietà Component e route all'interno dello slot 
+                ** TRANSITION **: Componente utilizzata per ottenere un effetto di transizione al componente che si trova dentro ROUTER-VIEW, la tranzizione poi dovrà essere definita con css o scss
+                ** COMPONENT **:  L'attributo :key="route.path" viene utilizzato per garantire la corretta distruzione e ricreazione del componente quando la rotta cambia, mentre l'attributo :is="Component" assegna dinamicamente il componente corretto in base alla rotta attuale
+            -->
+            <router-view v-slot="{Component, route}">
+                <transition name="fade" >
+                    <div>
+                        <component :is="Component" :key="route.path" />
+                    </div>
+                </transition>
+            </router-view>
+        </main>    
     </div>
+
     <!-- intro netlix -->
     <div v-if="store.intro" id="containerNet">
         
         <div class="netflix" letter="N">
+            
             <div class="helper-1">
                 <div class="effect-brush">
-                    <span v-for="x in 31" :class="`fur-${x++}`"></span>                    
+                    <span v-for="x in 31" :class="`fur-${x}`"></span>                    
                 </div>
                 <div class="effect-lumieres">
-                    <span v-for="x in 28" :class="`lamp-${x++}`"></span>
+                    <span v-for="x in 28" :class="`lamp-${x}`"></span>
                 </div>
             </div>
             <div class="helper-2">
                 <div class="effect-brush">
-                    <span v-for="x in 31" :class="`fur-${x++}`"></span>
+                    <span v-for="x in 31" :class="`fur-${x}`"></span>
                 </div>
             </div>
             <div class="helper-3">
                 <div class="effect-brush">
-                    <span v-for="x in 31" :class="`fur-${x++}`"></span>
+                    <span v-for="x in 31" :class="`fur-${x}`"></span>
                 </div>
             </div>
             <div class="helper-4">
                 <div class="effect-brush">
-                    <span v-for="x in 31" :class="`fur-${x++}`"></span>
+                    <span v-for="x in 31" :class="`fur-${x}`"></span>
                 </div>
             </div>
         </div>
@@ -76,6 +89,20 @@ export default {
 @use './style/main.scss';
 @use './../src/style/partials/_mixin.scss' as *;
 @use './style/partials/_variables.scss' as *;
+@use 'sass:math';
+
+//****  transition route  ****/
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 1s;
+
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+//**** end transition route  ****/
 
 #app {
     background-color: #141414;
@@ -421,310 +448,310 @@ body {
                     --color: #ff0100;
                     left: 0.7%;
                     width: 1%;
-                    animation-delay: (random(200) / 100) + s; 
+                    animation-delay: calc(random(200) / 100) + s;
         
-                    &::before{
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                    &::before {
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-2 {
                     --color: #ffde01;
                     left: 2.2%;
                     width: 1.4%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-3 {
                     --color: #ff00cc;
                     left: 5.8%;
                     width: 2.1%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-4 {
                     --color: #04fd8f;
                     left: 10.1%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-5 {
                     --color: #ff0100;
                     left: 12.9%;
                     width: 1.4%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-6 {
                     --color: #ff9600;
                     left: 15.3%;
                     width: 2.8%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-7 {
                     --color: #0084ff;
                     left: 21.2%;
                     width: 2.5%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-8 {
                     --color: #f84006;
                     left: 25%;
                     width: 2.5%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-9 {
                     --color: #ffc601;
                     left: 30.5%;
                     width: 3%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-10 {
                     --color: #ff4800;
                     left: 36.3%;
                     width: 3%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-11 {
                     --color: #fd0100;
                     left: 41%;
                     width: 2.2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-12 {
                     --color: #01ffff;
                     left: 44.2%;
                     width: 2.6%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-13 {
                     --color: #ffc601;
                     left: 51.7%;
                     width: 0.5%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-14 {
                     --color: #ffc601;
                     left: 52.1%;
                     width: 1.8%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-15 {
                     --color: #0078fe;
                     left: 53.8%;
                     width: 2.3%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: math.div(random(200), 100) + s;
                         left: percentage($number: 0);
-                        left: percentage(random(200) / 100);
+                        left: calc(percentage(math.div(random(200), 100)));
                     }
                 }
                 .lamp-16 {
                     --color: #0080ff;
                     left: 57.2%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-17 {
                     --color: #ffae01;
                     left: 62.3%;
                     width: 2.9%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-18 {
                     --color: #ff00bf;
                     left: 65.8%;
                     width: 1.7%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-19 {
                     --color: #a601f4;
                     left: 72.8%;
                     width: 0.8%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-20 {
                     --color: #f30b34;
                     left: 74.3%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-21 {
                     --color: #ff00bf;
                     left: 79.8%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-22 {
                     --color: #04fd8f;
                     left: 78.2%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-23 {
                     --color: #01ffff;
                     left: 78.5%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-24 {
                     --color: #a201ff;
                     left: 85.3%;
                     width: 1.1%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-25 {
                     --color: #ec0014;
                     left: 86.9%;
                     width: 1.1%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-26 {
                     --color: #0078fe;
                     left: 88.8%;
                     width: 2%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-27 {
                     --color: #ff0036;
                     left: 92.4%;
                     width: 2.4%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
                 .lamp-28 {
                     --color: #06f98c;
                     left: 96.2%;
                     width: 2.1%;
-                    animation-delay: (random(200) / 100) + s;
+                    animation-delay: calc(random(200) / 100) + s;
         
                     &::before {
-                        left: percentage((random(200) / 100));
-                        animation-delay: (random(200) / 100) + s;
+                        left: calc(percentage(math.div(random(200), 100)));
+                        animation-delay: calc(random(200) / 100) + s;
                     }
                 }
         
