@@ -4,7 +4,7 @@ import axios from 'axios';
 import CardComp from './CardComp.vue';
 
 export default {
-    name: 'FilmComp',
+    name: 'UpcomingComp',
     components: {
         CardComp
     },
@@ -29,33 +29,23 @@ export default {
         async films() {
 
             try {
-                const [ response1, response2 ] = await Promise.all([
-
-                    axios.get(`${store.path}${store.TopRated}${store.apiKey}${store.page}`),
-                    axios.get(`${store.path}${store.Popular}${store.apiKey}${store.page}`)
-                ]);       
+                const response = await axios.get(`${store.path}${store.Upcoming}${store.apiKey}${store.page}`);       
 
                 if (this.selectValue !== "all") {    
 
                     console.log('ciao')
 
-                    const filteredResults1 = response1.data.results.filter(elem =>
-                        elem.genre_ids.includes(parseInt(this.selectValue))
-                    );
-                    const filteredResults2 = response2.data.results.filter(elem =>
+                    const filteredResults = response.data.results.filter(elem =>
                         elem.genre_ids.includes(parseInt(this.selectValue))
                     );
                     
-                    console.log(filteredResults1)
-                    console.log(filteredResults2)
+                    console.log(filteredResults)
 
-                    store.arrayResultsTopRated = filteredResults1;
-                    store.arrayResultsPopular = filteredResults2;
+                    store.arrayResultsUpcoming = filteredResults;
 
                 } else {
 
-                    store.arrayResultsTopRated = response1.data.results;
-                    store.arrayResultsPopular = response2.data.results;
+                    store.arrayResultsUpcoming = response.data.results;
                 }
 
             } catch (error) {
@@ -81,18 +71,15 @@ export default {
                 });
                 
                 // assegnazione dell'indice alla variabile
-                if (filmType === "topRated") {
-                    store.tlrInd = index;
-                } else if (filmType === "popular") {
-                    store.tlrInd2 = index;
+                if (filmType === "upcoming") {
+                    store.tlrInd3 = index;
                 }
 
             } else {
 
                 // resetto l'array e l'indice
                 store.arrayTrailers = [];
-                store.tlrInd = "";
-                store.tlrInd2 = "";
+                store.tlrInd3 = "";
 
                 // la variabile diventa di nuovo false resettandosi una volta chiuso il modal
                 store.closeModal = false;
@@ -138,7 +125,7 @@ export default {
         <div class="header-films d-flex align-items-center my-4 gap-5">
 
             <!-- title -->
-            <h2 class="text-white fs-1 fw-bold">Films</h2>
+            <h2 class="text-white fs-1 fw-bold">Upcoming</h2>
 
             <!-- *** select ***
                 @change: implemento l'evento @change per rilevare le modifiche apportate all'elemento di input <select>. Viene attivato quando l'utente interagisce con l'elemento di input e ne cambia il valore.
@@ -154,12 +141,11 @@ export default {
             </select>
         </div>
 
-        <!-- Top Rated -->
-        <div class="mb-4" v-if="store.arrayResultsTopRated.length">
-            <h3 class="fs-2 greyH3">Top Rated</h3>
+        <!-- Upcoming -->
+        <div class="mb-4" v-if="store.arrayResultsUpcoming.length">
             <div class="row m-0">
     
-                <CardComp v-for="(elem, index) in store.arrayResultsTopRated" :key="index"  
+                <CardComp v-for="(elem, index) in store.arrayResultsUpcoming" :key="index"  
     
                     :title= "elem.title"
                     :original_title= "elem.original_title"
@@ -168,29 +154,8 @@ export default {
                     :image="elem.poster_path"
                     :overview="elem.overview"
                     :ind="index"
-                    :indTrailer="store.tlrInd"
-                    @trailer="trailersFilms(elem.id, index, 'topRated')"
-                    @closeModal="closeMod">
-                </CardComp>
-            </div>
-        </div>
-
-        <!-- Popular -->
-        <div v-if="store.arrayResultsPopular.length">
-            <h3 class="fs-2 greyH3">Popular</h3>
-            <div class="row m-0">
-    
-                <CardComp v-for="(elem, index) in store.arrayResultsPopular" :key="index"  
-    
-                    :title= "elem.title"
-                    :original_title= "elem.original_title"
-                    :language= "elem.original_language"
-                    :vote= "elem.vote_average"
-                    :image="elem.poster_path"
-                    :overview="elem.overview"
-                    :ind="index"
-                    :indTrailer="store.tlrInd2"
-                    @trailer="trailersFilms(elem.id, index, 'popular')"
+                    :indTrailer="store.tlrInd3"
+                    @trailer="trailersFilms(elem.id, index, 'upcoming')"
                     @closeModal="closeMod">
                 </CardComp>
             </div>

@@ -17,86 +17,60 @@ export default {
         this.series()
     },
     methods: {  
-        series() {
-            // tv series - top rated
-            axios.get(`${store.path}${store.SeriesTopRated}${store.apiKey}${store.page}`)
-                .then(response => {
 
-                    store.arrayResultsSeriesTopRated = response.data.results              
-                })
+        // chiamata di tuttte le api per series in modo asincrono
+        async series() {
 
-            // tv series - - popular
-            axios.get(`${store.path}${store.SeriesPopular}${store.apiKey}${store.page}`)
-                .then(response => {
+            try {
+                const [ response1, response2 ] = await Promise.all([
 
-                    store.arrayResultsSeriesPopular = response.data.results              
-                })
+                    axios.get(`${store.path}${store.SeriesTopRated}${store.apiKey}${store.page}`),
+                    axios.get(`${store.path}${store.SeriesPopular}${store.apiKey}${store.page}`)
+                ]);
+
+                store.arrayResultsSeriesTopRated = response1.data.results;
+                store.arrayResultsSeriesPopular = response2.data.results;
+                
+            } catch (error) {
+                console.error(error);
+            }
         },
-        // funzione per la produzione del trailer della serie nel quale avviene il click ( series top rated --- series on search)
-        trailerSeriesTR(movieId, index) {
+
+        // funzione per la chiamata dei trailers di Movies
+        async trailerSeries(movieId, index, seriesType) {
 
             if ( !store.closeModal) {
 
-                axios.get(`https://api.themoviedb.org/3/tv/${movieId}/videos${store.apiKey}`)
-                .then(response => {
-                    
-                    store.arrayTrailers = response.data.results;   
+                const response = await axios.get(`https://api.themoviedb.org/3/tv/${movieId}/videos${store.apiKey}`);
 
-                    store.arrayTrailers.forEach( (element, index ) => {
+                store.arrayTrailers = response.data.results;
+
+                store.arrayTrailers.forEach( (element, ind ) => {
                         
-                        // se element.type corrisponde a trailer mi torna l'indice altrimenti cerco la clip
-                        if ( element.type == "Trailer") {
-                            store.tlrIndexKey = index;
-                        } else if ( element.type == "Clip" ) {
-                            store.tlrIndexKey = index;
-
-                        }
-                    });
-                })
-
-                store.tlrIndSeries = index;
+                    if ( element.type == "Trailer" || element.type == "Clip") {
+                        store.tlrIndexKey = ind;
+                    } 
+                });
+                
+                // assegnazione dell'indice alla variabile
+                if (seriesType === "topRated") {
+                    store.tlrIndSeries = index;
+                } else if (seriesType === "popular") {
+                    store.tlrIndSeries2 = index;
+                }
 
             } else {
 
+                // resetto l'array e l'indice
                 store.arrayTrailers = [];
-                store.tlrIndSeries = '';
+                store.tlrIndSeries = "";
+                store.tlrIndSeries2 = "";
 
                 // la variabile diventa di nuovo false resettandosi una volta chiuso il modal
                 store.closeModal = false;
-
-            }
+            }        
         },
-        // funzione per i trailer di series popular
-        trailerSeriesPop(movieId, index) {
 
-            if ( !store.closeModal) {
-                axios.get(`https://api.themoviedb.org/3/tv/${movieId}/videos${store.apiKey}`)
-                .then(response => {
-                    
-                    store.arrayTrailers = response.data.results;   
-
-                    store.arrayTrailers.forEach( (element, index ) => {
-                        
-                        if ( element.type == "Trailer") {
-                            store.tlrIndexKey = index;
-                        } else if ( element.type == "Clip" ) {
-                            store.tlrIndexKey = index;
-
-                        }
-                    });
-                })
-
-                store.tlrIndSeries2 = index;
-            } else {
-
-                store.arrayTrailers = [];
-                store.tlrIndSeries2 = '';
-
-                // la variabile diventa di nuovo false resettandosi una volta chiuso il modal
-                store.closeModal = false;
-
-            }
-        },
         // Funzione per la chiusura del modal 
         closeMod() {
             store.closeModal = true;
@@ -123,7 +97,7 @@ export default {
                 :overview="elem.overview"
                 :ind="index"
                 :indTrailer="store.tlrIndSeries"
-                @trailer="trailerSeriesTR(elem.id, index)"
+                @trailer="trailerSeries(elem.id, index, 'topRated')"
                 @closeModal="closeMod">
             </CardComp>
         </div>
@@ -140,7 +114,7 @@ export default {
                 :overview="elem.overview"
                 :ind="index"
                 :indTrailer="store.tlrIndSeries2"
-                @trailer="trailerSeriesPop(elem.id, index)"
+                @trailer="trailerSeries(elem.id, index, 'popular')"
                 @closeModal="closeMod">
             </CardComp>
         </div>

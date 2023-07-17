@@ -12,7 +12,7 @@ export default {
         image: String,
         overview: String,
         ind: Number,
-        indTrailer: String
+        indTrailer: Number
     },
 
     data() {

@@ -43,10 +43,11 @@ export default {
                 ** TRANSITION **: Componente utilizzata per ottenere un effetto di transizione al componente che si trova dentro ROUTER-VIEW, la tranzizione poi dovrà essere definita con css o scss
                 ** COMPONENT **:  L'attributo :key="route.path" viene utilizzato per garantire la corretta distruzione e ricreazione del componente quando la rotta cambia, mentre l'attributo :is="Component" assegna dinamicamente il componente corretto in base alla rotta attuale
             -->
+            
             <router-view v-slot="{Component, route}">
                 <transition name="fade" >
                     <div>
-                        <component :is="Component" :key="route.path" />
+                        <component :is="Component" :key="route.path"/>
                     </div>
                 </transition>
             </router-view>
@@ -104,7 +105,7 @@ export default {
 }
 //**** end transition route  ****/
 
-#app {
+body {
     background-color: #141414;
 }
 header {

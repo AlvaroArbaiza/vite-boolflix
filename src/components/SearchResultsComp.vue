@@ -29,14 +29,11 @@ export default {
                 const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos${store.apiKey}`);
 
                 store.arrayTrailers = response.data.results;
-
                 store.arrayTrailers.forEach( (element, ind ) => {
                         
-                    if ( element.type == "Trailer") {
+                    if ( element.type == "Trailer" || element.type == "Clip") {
                         store.tlrIndexKey = ind;
-                    } else if ( element.type == "Clip" ) {
-                        store.tlrIndexKey = ind;
-                    }
+                    } 
                 });
                 
                 // assegnazione dell'indice alla variabile
@@ -62,13 +59,11 @@ export default {
 
                 // assegnazione di results ad arrayTrailers
                 store.arrayTrailers = response.data.results;
-                store.arrayTrailers.forEach( (element, index ) => {
+                store.arrayTrailers.forEach( (element, ind ) => {
                         
-                    if ( element.type == "Trailer") {
-                        store.tlrIndexKey = index;
-                    } else if ( element.type == "Clip" ) {
-                        store.tlrIndexKey = index;
-                    }
+                    if ( element.type == "Trailer" || element.type == "Clip") {
+                        store.tlrIndexKey = ind;
+                    } 
                 });
                 
                 // assegnazione dell'indice alla variabile

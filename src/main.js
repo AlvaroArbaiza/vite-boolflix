@@ -9,7 +9,8 @@ import MainComp from './components/MainComp.vue';
 import SeriesTvComp from './components/SeriesTvComp.vue';
 import FilmComp from './components/FilmComp.vue';
 import SearchResultsComp from './components/SearchResultsComp.vue';
-
+import NowPlayingComp from './components/NowPlayingComp.vue';
+import UpcomingComp from './components/UpcomingComp.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,19 +25,22 @@ const router = createRouter({
         // MainComp - Home page
         { 
             path: '/', 
-            component: MainComp 
+            component: MainComp,
+            name: 'HomePage'
         },
 
         // SeriesTvComp - Serie TV
         { 
             path: '/SeriesTv', 
-            component: SeriesTvComp
+            component: SeriesTvComp,
+            name: 'SeriesTv'
         },
 
         // FilmComp - Film
         { 
             path: '/Film', 
-            component: FilmComp
+            component: FilmComp,
+            name: 'Film'
         },
 
         // SearchResultsComp - SearchResults
@@ -44,6 +48,20 @@ const router = createRouter({
             path: '/Search', 
             name: 'search-results',
             component: SearchResultsComp
+        },
+
+        // NowPlayingComp - NowPlaying
+        { 
+            path: '/NowPlaying', 
+            name: 'now_playing',
+            component: NowPlayingComp
+        },
+
+        // UpcomingComp - Upcoming
+        { 
+            path: '/Upcoming', 
+            name: 'upcoming',
+            component: UpcomingComp
         }
     ]
 });
